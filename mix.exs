@@ -20,7 +20,7 @@ defmodule Stripe.Mixfile do
         "coveralls.html": :test
       ],
       test_coverage: [tool: ExCoveralls],
-      version: "2.2.1",
+      version: "2.2.3",
       source_url: "https://github.com/code-corps/stripity_stripe/"
     ]
   end
@@ -50,20 +50,19 @@ defmodule Stripe.Mixfile do
     ]
   end
 
-  defp apps(:test), do: [:bypass | apps()]
+  defp apps(:test), do: apps()
   defp apps(_), do: apps()
   defp apps(), do: [:hackney, :logger, :poison, :uri_query]
 
   defp deps do
     [
-      {:bypass, "~> 1.0", only: :test},
-      {:dialyxir, "1.0.0-rc.6", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.20", only: :dev},
+      {:dialyxir, "1.0.0-rc.4", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.20.2", only: :dev},
       {:excoveralls, "~> 0.8.1", only: :test},
-      {:hackney, "~> 1.13"},
-      {:inch_ex, "~> 2.0", only: [:dev, :test]},
-      {:mox, "~> 0.5", only: :test},
-      {:poison, ">= 3.0.0"},
+      {:hackney, "~> 1.15"},
+      {:inch_ex, "~> 0.5", only: [:dev, :test]},
+      {:mox, "~> 0.4", only: :test},
+      {:poison, "~> 2.0 or ~> 3.0"},
       {:uri_query, "~> 0.1.2"},
       {:exexec, "~> 0.1.0", only: :test}
     ]
