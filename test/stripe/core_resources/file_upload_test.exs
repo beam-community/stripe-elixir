@@ -14,14 +14,14 @@ defmodule Stripe.FileUploadTest do
 
   describe "retrieve/2" do
     test "retrieves an file" do
-      assert {:ok, %Stripe.FileUpload{}} = Stripe.FileUpload.retrieve("file_123")
+      assert {:ok, _} = Stripe.FileUpload.retrieve("file_123")
       assert_stripe_requested :get, "/v1/files/file_123"
     end
   end
 
   describe "list/2" do
     test "lists all files" do
-      assert {:ok, %Stripe.List{data: [%Stripe.FileUpload{}]}} = Stripe.FileUpload.list()
+      assert {:ok, _} = Stripe.FileUpload.list()
       assert_stripe_requested :get, "/v1/files"
     end
   end
