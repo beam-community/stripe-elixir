@@ -44,6 +44,11 @@ defmodule Stripe.Request do
   """
   @spec new_request(Stripe.options(), map) :: t
   def new_request(opts \\ [], headers \\ %{}) do
+    headers =
+      opts
+      |> Keyword.get(:headers, %{})
+      |> Map.merge(headers)
+
     %Request{opts: opts, headers: headers}
   end
 
