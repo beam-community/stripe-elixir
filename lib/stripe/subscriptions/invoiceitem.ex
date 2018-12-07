@@ -117,6 +117,19 @@ defmodule Stripe.Invoiceitem do
   end
 
   @doc """
+  Delete and invoiceitem
+
+  Takes the `id` of the invoiceitem to delete.
+  """
+  @spec delete(Stripe.id() | t, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
+  def delete(id, opts \\ []) do
+    new_request(opts)
+    |> put_endpoint(@plural_endpoint <> "/#{get_id!(id)}")
+    |> put_method(:delete)
+    |> make_request()
+  end
+
+  @doc """
   List all invoiceitems.
   """
   @spec list(params, Stripe.options()) :: {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
