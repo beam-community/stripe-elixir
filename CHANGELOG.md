@@ -1,5 +1,14 @@
 # Latest
 
+## 2.2.2
+
+- [Upgrade stripe-mock 0.38](https://github.com/code-corps/stripity_stripe/pull/436)
+- *New Feature:* [Add delete endpoint to Invoiceitems](https://github.com/code-corps/stripity_stripe/pull/434)
+- [Ensure tests wait until stripe_mock started](https://github.com/code-corps/stripity_stripe/pull/427)
+- [Upgraded erlexec for OTP 21 support](https://github.com/code-corps/stripity_stripe/pull/426)
+- [Added missing invoice attributes](https://github.com/code-corps/stripity_stripe/pull/425)
+- [Enabled Dialyxir in CI](https://github.com/code-corps/stripity_stripe/pull/424)
+
 ## 2.2.1
 
 - [Fix: date_query type had fields incorrectly marked as mandatory](https://github.com/code-corps/stripity_stripe/pull/421)
