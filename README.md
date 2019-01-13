@@ -131,11 +131,9 @@ config :stripity_stripe, secret_key: "YOUR SECRET KEY"
 config :stripity_stripe, platform_client_id: "YOUR CONNECT PLATFORM CLIENT ID"
 ```
 
-To customize the underlying HTTPoison library, you may optionally add an `:httpoison_options` key to the stripity_stripe configuration.  For a full list of configuration options, please refer to the [HTTPoison documentation](https://github.com/edgurgel/httpoison).
+Moreover, if you are using Jason instead of Poison, you can configure the library to use Jason like so:
 
-```ex
-config :stripity_stripe, httpoison_options: [timeout: 10000, recv_timeout: 10000, proxy: {"proxy.mydomain.com", 8080}]
-```
+config :stripity_stripe, json_library: Jason
 
 ## Testing
 

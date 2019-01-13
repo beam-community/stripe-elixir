@@ -21,7 +21,7 @@ defmodule Helper do
   @fixture_path "./test/fixtures/"
 
   def load_fixture(filename) do
-    File.read!(@fixture_path <> filename) |> Poison.decode!()
+    File.read!(@fixture_path <> filename) |> Stripe.API.json_library().decode!()
   end
 
   def wait_until_stripe_mock_launch() do

@@ -141,7 +141,7 @@ defmodule Stripe.Webhook do
 
   defp convert_to_event!(payload) do
     payload
-    |> Poison.decode!()
+    |> Stripe.API.json_library().decode!()
     |> Stripe.Converter.convert_result()
   end
 end

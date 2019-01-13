@@ -19,6 +19,15 @@ defmodule Stripe.API do
   @api_version "2018-08-23"
   @http_module Application.get_env(:stripity_stripe, :http_module) || :hackney
 
+  @doc """
+  In config.exs your implicit or expicit configuration is:
+    config :stripity_stripe,
+      json_library: Jason # defaults to Poison but can be configured to Jason
+  """
+  def json_library() do
+    Application.get_env(:stripity_stripe, :json_library, Poison)
+  end
+
   def supervisor_children do
     if use_pool?() do
       [:hackney_pool.child_spec(@pool_name, get_pool_options())]
@@ -247,7 +256,7 @@ defmodule Stripe.API do
     decoded_body =
       body
       |> decompress_body(headers)
-      |> Poison.decode!()
+      |> json_library().decode!()
 
     {:ok, decoded_body}
   end
@@ -256,7 +265,7 @@ defmodule Stripe.API do
     request_id = headers |> List.keyfind("Request-Id", 0)
 
     error =
-      case Poison.decode(body) do
+      case json_library().decode(body) do
         {:ok, %{"error_description" => _} = api_error} ->
           Error.from_stripe_error(status, api_error, request_id)
 
