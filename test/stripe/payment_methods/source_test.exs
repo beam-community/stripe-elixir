@@ -33,8 +33,7 @@ defmodule Stripe.SourceTest do
 
   describe "detach/2" do
     test "detaches a source from a customer" do
-      assert {:ok, %{deleted: true, id: "src_123"}} =
-               Stripe.Source.detach("src_123", %{customer: "cus_123"})
+      assert {:ok, %{id: "src_123"}} = Stripe.Source.detach("src_123", %{customer: "cus_123"})
 
       assert_stripe_requested(:delete, "/v1/customers/cus_123/sources/src_123")
     end

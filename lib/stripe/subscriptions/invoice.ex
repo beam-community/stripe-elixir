@@ -7,6 +7,7 @@ defmodule Stripe.Invoice do
   - Create an invoice
   - Retrieve an invoice
   - Update an invoice
+  - Void an invoice
 
   Does not take options yet.
 
@@ -235,6 +236,17 @@ defmodule Stripe.Invoice do
     |> put_method(:post)
     |> put_params(params)
     |> cast_to_id([:source])
+    |> make_request()
+  end
+
+  @doc """
+  Void an invoice
+  """
+  @spec void(Stripe.id() | t, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
+  def void(id, opts \\ []) do
+    new_request(opts)
+    |> put_endpoint(@plural_endpoint <> "/#{get_id!(id)}/void")
+    |> put_method(:post)
     |> make_request()
   end
 end

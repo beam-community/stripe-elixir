@@ -87,4 +87,12 @@ defmodule Stripe.InvoiceTest do
       assert %Stripe.Invoice{} = hd(invoices)
     end
   end
+
+  describe "void/2" do
+    test "voids an invoice" do
+      {:ok, invoice} = Stripe.Invoice.retrieve("in_123")
+      assert {:ok, %Stripe.Invoice{} = _voided_invoice} = Stripe.Invoice.void(invoice)
+      assert_stripe_requested(:post, "/v1/invoices/#{invoice.id}/void")
+    end
+  end
 end
