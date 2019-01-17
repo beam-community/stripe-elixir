@@ -20,7 +20,7 @@ defmodule Stripe.WebhookTest do
   end
 
   test "payload with a valid signature should return event" do
-    timestamp = System.system_time(:seconds)
+    timestamp = System.system_time(:second)
     payload = @valid_payload
     signature = generate_signature(timestamp, payload)
     signature_header = create_signature_header(timestamp, @valid_scheme, signature)
@@ -29,7 +29,7 @@ defmodule Stripe.WebhookTest do
   end
 
   test "payload with an invalid signature should fail" do
-    timestamp = System.system_time(:seconds)
+    timestamp = System.system_time(:second)
     payload = @valid_payload
     signature = generate_signature(timestamp, "random")
     signature_header = create_signature_header(timestamp, @valid_scheme, signature)
@@ -38,7 +38,7 @@ defmodule Stripe.WebhookTest do
   end
 
   test "payload with wrong secret should fail" do
-    timestamp = System.system_time(:seconds)
+    timestamp = System.system_time(:second)
     payload = @valid_payload
     signature = generate_signature(timestamp, payload, "wrong")
     signature_header = create_signature_header(timestamp, @valid_scheme, signature)
@@ -47,7 +47,7 @@ defmodule Stripe.WebhookTest do
   end
 
   test "payload with missing signature scheme should fail" do
-    timestamp = System.system_time(:seconds)
+    timestamp = System.system_time(:second)
     payload = @valid_payload
     signature = generate_signature(timestamp, payload)
     signature_header = create_signature_header(timestamp, @invalid_scheme, signature)
