@@ -5,6 +5,7 @@ erl_crash.dump
 config/config.secret.exs
 /doc
 .DS_Store
+tags
 
 # elixir LS files
 

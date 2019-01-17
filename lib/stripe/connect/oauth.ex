@@ -11,7 +11,7 @@ defmodule Stripe.Connect.OAuth do
   Stripe API reference: https://stripe.com/docs/connect/reference
   """
 
-  alias Stripe.Converter
+  alias Stripe.{Config, Converter}
 
   @callback token(code :: String.t()) :: {:ok, map}
   @callback authorize_url(map) :: String.t()
@@ -188,12 +188,12 @@ defmodule Stripe.Connect.OAuth do
 
   @spec get_client_id() :: String.t()
   defp get_client_id() do
-    Application.get_env(:stripity_stripe, :connect_client_id)
+    Config.resolve(:connect_client_id)
   end
 
   @spec get_client_secret() :: String.t()
   defp get_client_secret() do
-    Application.get_env(:stripity_stripe, :api_key)
+    Config.resolve(:api_key)
   end
 
   @spec get_default_authorize_map() :: map
