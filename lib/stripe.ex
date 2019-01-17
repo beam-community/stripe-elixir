@@ -17,6 +17,19 @@ defmodule Stripe do
 
       config :stripity_stripe, api_key: System.get_env("STRIPE_API_KEY")
 
+  ### Shared Options
+
+  Almost all of the requests that can be sent accept the following options:
+
+    * `:api_key` - The Stripe API key to use for the request. See
+      [https://stripe.com/docs/api/authentication](https://stripe.com/docs/api/authentication)
+    * `:connect_account` - The ID of a Stripe Connect account for which the
+      request should be made, passed through as the "Stripe-Account" header. The
+      preferred authentication method for Stripe Connect. See
+      [https://stripe.com/docs/connect/authentication#stripe-account-header](https://stripe.com/docs/connect/authentication#stripe-account-header)
+    * `:expand` - Takes a list of fields that should be expanded in the response
+      from Stripe. See [https://stripe.com/docs/api/expanding_objects](https://stripe.com/docs/api/expanding_objects)
+
   ### HTTP Connection Pool
 
   Stripity Stripe is set up to use an HTTP connection pool by default. This
