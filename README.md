@@ -22,7 +22,7 @@ The actively developed line of releases is `2.x.x` and is contained within the `
 ------------ | -------------
 `2.0.x` | `2018-02-28`
 `2.1.x - 2.2.x` | `2018-05-21`
-`master` | `2018-08-23`
+`master` | `2018-11-08`
 
 # Documentation
 

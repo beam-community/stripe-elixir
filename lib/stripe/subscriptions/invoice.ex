@@ -30,7 +30,6 @@ defmodule Stripe.Invoice do
           billing: String.t() | nil,
           billing_reason: String.t() | nil,
           charge: Stripe.id() | Stripe.Charge.t() | nil,
-          closed: boolean,
           currency: String.t(),
           custom_fields: custom_fields() | nil,
           customer: Stripe.id() | Stripe.Customer.t(),
@@ -89,7 +88,6 @@ defmodule Stripe.Invoice do
     :billing,
     :billing_reason,
     :charge,
-    :closed,
     :currency,
     :custom_fields,
     :customer,
@@ -176,7 +174,7 @@ defmodule Stripe.Invoice do
         when params:
                %{
                  optional(:application_fee) => integer,
-                 optional(:closed) => boolean,
+                 optional(:auto_advance) => boolean,
                  optional(:days_until_due) => integer,
                  optional(:default_source) => String.t(),
                  optional(:description) => String.t(),

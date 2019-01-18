@@ -26,7 +26,7 @@ defmodule Stripe.Converter do
     dispute
     event
     external_account
-    file_upload
+    file
     invoice
     invoiceitem
     line_item
@@ -78,16 +78,16 @@ defmodule Stripe.Converter do
     processed_map =
       struct_keys
       |> Enum.reduce(%{}, fn key, acc ->
-           string_key = to_string(key)
+        string_key = to_string(key)
 
-           converted_value =
-             case string_key do
-               string_key when string_key in @no_convert_maps -> Map.get(value, string_key)
-               _ -> Map.get(value, string_key) |> convert_value()
-             end
+        converted_value =
+          case string_key do
+            string_key when string_key in @no_convert_maps -> Map.get(value, string_key)
+            _ -> Map.get(value, string_key) |> convert_value()
+          end
 
-           Map.put(acc, key, converted_value)
-         end)
+        Map.put(acc, key, converted_value)
+      end)
       |> module.__from_json__()
 
     struct(module, processed_map)

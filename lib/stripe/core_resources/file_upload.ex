@@ -8,7 +8,7 @@ defmodule Stripe.FileUpload do
   - Retrieve a file
   - List all files
 
-  Stripe API reference: https://stripe.com/docs/api#file_uploads
+  Stripe API reference: https://stripe.com/docs/api/files
   """
 
   use Stripe.Entity
