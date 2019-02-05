@@ -55,6 +55,8 @@ To make API calls, it is necessary to configure your Stripe secret key.
 ```ex
 use Mix.Config
 
+config :stripity_stripe, api_key: System.get_env("STRIPE_SECRET")
+# OR
 config :stripity_stripe, api_key: "YOUR SECRET KEY"
 ```
 
