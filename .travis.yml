@@ -4,9 +4,14 @@ elixir:
   - 1.5
   - 1.6
   - 1.7
+  - 1.8
 otp_release:
   - 19.3
   - 20.1
+matrix:
+  exclude:
+    - otp_release: 19.3
+      elixir: 1.8
 sudo: false
 env:
   global:
