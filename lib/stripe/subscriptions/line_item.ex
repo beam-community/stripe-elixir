@@ -69,7 +69,7 @@ defmodule Stripe.LineItem do
              } | %{}
   def retrieve(id, params \\ %{}, opts \\ []) do
     new_request(opts)
-    |> put_endpoint("invoices" <> "/#{get_id!(id)}" <> "lines")
+    |> put_endpoint("invoices" <> "/#{get_id!(id)}/" <> "lines")
     |> put_method(:get)
     |> put_params(params)
     |> make_request()
