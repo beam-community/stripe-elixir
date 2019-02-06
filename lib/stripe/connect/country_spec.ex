@@ -56,11 +56,13 @@ defmodule Stripe.CountrySpec do
   List all country specs.
   """
   @spec list(params, Stripe.options()) :: {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
-        when params: %{
-               optional(:ending_before) => t | Stripe.id(),
-               optional(:limit) => 1..100,
-               optional(:starting_after) => t | Stripe.id()
-             } | %{}
+        when params:
+               %{
+                 optional(:ending_before) => t | Stripe.id(),
+                 optional(:limit) => 1..100,
+                 optional(:starting_after) => t | Stripe.id()
+               }
+               | %{}
   def list(params \\ %{}, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@plural_endpoint)

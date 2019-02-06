@@ -10,10 +10,12 @@ defmodule Stripe.Config do
   """
   @spec resolve(atom, any) :: any
   def resolve(key, default \\ nil)
+
   def resolve(key, default) when is_atom(key) do
     Application.get_env(:stripity_stripe, key, default)
     |> expand_value()
   end
+
   def resolve(key, _) do
     raise(
       ArgumentError,
@@ -22,12 +24,13 @@ defmodule Stripe.Config do
   end
 
   defp expand_value({module, function, args})
-  when is_atom(function) and is_list(args)
-  do
+       when is_atom(function) and is_list(args) do
     apply(module, function, args)
   end
+
   defp expand_value(value) when is_function(value) do
     value.()
   end
+
   defp expand_value(value), do: value
 end

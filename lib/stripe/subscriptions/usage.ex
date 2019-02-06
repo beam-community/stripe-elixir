@@ -40,10 +40,10 @@ defmodule Stripe.SubscriptionItem.Usage do
   """
   @spec create(Stripe.id(), params, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
         when params: %{
-              :quantity => float | pos_integer | 0,
-              :timestamp => Stripe.timestamp() | non_neg_integer,
-              optional(:action) => String.t()
-             } 
+               :quantity => float | pos_integer | 0,
+               :timestamp => Stripe.timestamp() | non_neg_integer,
+               optional(:action) => String.t()
+             }
   def create(id, params, opts) do
     new_request(opts)
     |> put_endpoint("#{@plural_endpoint}/#{id}/usage_records")
@@ -55,12 +55,13 @@ defmodule Stripe.SubscriptionItem.Usage do
   @doc """
   List all subscription item period summaries
   """
-  @spec list(Stripe.id(), params, Stripe.options) :: {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
+  @spec list(Stripe.id(), params, Stripe.options()) ::
+          {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
         when params: %{
-          optional(:ending_before) => t | Stripe.id(),
-          optional(:limit) => 1..100,
-          optional(:starting_after) => t | Stripe.id()
-        } 
+               optional(:ending_before) => t | Stripe.id(),
+               optional(:limit) => 1..100,
+               optional(:starting_after) => t | Stripe.id()
+             }
   def list(id, params \\ %{}, opts \\ []) do
     new_request(opts)
     |> put_endpoint("#{@plural_endpoint}/#{id}/usage_record_summaries")

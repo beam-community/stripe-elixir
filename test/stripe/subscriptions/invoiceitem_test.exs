@@ -3,7 +3,9 @@ defmodule Stripe.InvoiceitemTest do
 
   describe "create/2" do
     test "creates an invoice" do
-      assert {:ok, %Stripe.Invoiceitem{}} = Stripe.Invoiceitem.create(%{customer: "cus_123", currency: "usd"})
+      assert {:ok, %Stripe.Invoiceitem{}} =
+               Stripe.Invoiceitem.create(%{customer: "cus_123", currency: "usd"})
+
       assert_stripe_requested(:post, "/v1/invoiceitems")
     end
   end

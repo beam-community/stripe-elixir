@@ -67,21 +67,23 @@ defmodule Stripe.Relay.Product do
   Create a product.
   """
   @spec create(params, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
-        when params: %{
-          optional(:caption) => String.t(),
-          optional(:deactive_on) => [Stripe.id()],
-          optional(:description) => String.t(),
-          optional(:id) => String.t(),
-          optional(:images) => [Stripe.id()],
-          optional(:description) => String.t(),
-          optional(:attributes) => list,
-          :name => String.t(),
-          :type => String.t(),
-          optional(:metadata) => Stripe.Types.metadata(),
-          optional(:package_dimensions) => map,
-          optional(:shippable) => boolean,
-          optional(:url) => String.t()
-        } | %{}
+        when params:
+               %{
+                 optional(:caption) => String.t(),
+                 optional(:deactive_on) => [Stripe.id()],
+                 optional(:description) => String.t(),
+                 optional(:id) => String.t(),
+                 optional(:images) => [Stripe.id()],
+                 optional(:description) => String.t(),
+                 optional(:attributes) => list,
+                 :name => String.t(),
+                 :type => String.t(),
+                 optional(:metadata) => Stripe.Types.metadata(),
+                 optional(:package_dimensions) => map,
+                 optional(:shippable) => boolean,
+                 optional(:url) => String.t()
+               }
+               | %{}
   def create(params, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@endpoint)
@@ -107,19 +109,21 @@ defmodule Stripe.Relay.Product do
   Takes the `id` and a map of changes.
   """
   @spec update(Stripe.id() | t, params, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
-        when params: %{
-          optional(:active) => boolean,
-          optional(:attributes) => list,
-          optional(:caption) => String.t(),
-          optional(:deactive_on) => [Stripe.id()],
-          optional(:description) => String.t(),
-          optional(:images) => [Stripe.id()],
-          optional(:metadata) => Stripe.Types.metadata(),
-          optional(:name) => String.t(),
-          optional(:package_dimensions) => map,
-          optional(:shippable) => boolean,
-          optional(:url) => String.t()
-        } | %{}
+        when params:
+               %{
+                 optional(:active) => boolean,
+                 optional(:attributes) => list,
+                 optional(:caption) => String.t(),
+                 optional(:deactive_on) => [Stripe.id()],
+                 optional(:description) => String.t(),
+                 optional(:images) => [Stripe.id()],
+                 optional(:metadata) => Stripe.Types.metadata(),
+                 optional(:name) => String.t(),
+                 optional(:package_dimensions) => map,
+                 optional(:shippable) => boolean,
+                 optional(:url) => String.t()
+               }
+               | %{}
   def update(id, params, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@endpoint <> "/#{get_id!(id)}")
@@ -143,17 +147,19 @@ defmodule Stripe.Relay.Product do
   List all product.
   """
   @spec list(params, Stripe.options()) :: {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
-        when params: %{
-          optional(:active) => boolean,
-          optional(:created) => Stripe.date_query(),
-          optional(:ending_before) => t | Stripe.id(),
-          optional(:ids) => Stripe.List.t(Stripe.id()),
-          optional(:limit) => 1..100,
-          optional(:shippable) => boolean,
-          optional(:starting_after) => t | Stripe.id(),
-          optional(:type) => String.t(),
-          optional(:url) => String.t()
-        } | %{}
+        when params:
+               %{
+                 optional(:active) => boolean,
+                 optional(:created) => Stripe.date_query(),
+                 optional(:ending_before) => t | Stripe.id(),
+                 optional(:ids) => Stripe.List.t(Stripe.id()),
+                 optional(:limit) => 1..100,
+                 optional(:shippable) => boolean,
+                 optional(:starting_after) => t | Stripe.id(),
+                 optional(:type) => String.t(),
+                 optional(:url) => String.t()
+               }
+               | %{}
   def list(params \\ %{}, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@endpoint)

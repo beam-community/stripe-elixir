@@ -14,6 +14,7 @@ defmodule Stripe.SubscriptionItemTest do
         subscription: "sub_123",
         plan: "plan_123"
       }
+
       assert {:ok, %Stripe.SubscriptionItem{}} = Stripe.SubscriptionItem.create(params)
       assert_stripe_requested(:post, "/v1/subscription_items")
     end

@@ -12,7 +12,7 @@ defmodule Stripe.APITest do
     verify_on_exit!()
 
     Stripe.APIMock
-    |> expect(:oauth_request, fn(method, _endpoint, _body) -> method end)
+    |> expect(:oauth_request, fn method, _endpoint, _body -> method end)
 
     assert Stripe.APIMock.oauth_request(:post, "www", %{body: "body"}) == :post
   end

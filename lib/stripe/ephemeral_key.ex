@@ -38,8 +38,8 @@ defmodule Stripe.EphemeralKey do
   """
   @spec create(params, String.t(), Keyword.t()) :: {:ok, t} | {:error, %Stripe.Error{}}
         when params: %{
-               :customer => Stripe.id(),
-            }
+               :customer => Stripe.id()
+             }
   def create(params, api_version, opts \\ []) do
     new_request(opts, %{"Stripe-Version": api_version})
     |> put_endpoint(@plural_endpoint)

@@ -3,7 +3,15 @@ defmodule Stripe.SkuTest do
 
   test "is creatable" do
     inventory = %{type: "finite", quantity: 500}
-    assert {:ok, %Stripe.Sku{}} = Stripe.Sku.create(%{currency: "USD", product: "prod_123", price: 100, inventory: inventory})
+
+    assert {:ok, %Stripe.Sku{}} =
+             Stripe.Sku.create(%{
+               currency: "USD",
+               product: "prod_123",
+               price: 100,
+               inventory: inventory
+             })
+
     assert_stripe_requested(:post, "/v1/skus")
   end
 
@@ -42,4 +50,3 @@ defmodule Stripe.SkuTest do
     assert_stripe_requested(:get, "/v1/skus")
   end
 end
-

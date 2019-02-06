@@ -111,14 +111,14 @@ defmodule Stripe.Order do
   """
   @spec create(params, Keyword.t()) :: {:ok, t} | {:error, Stripe.Error.t()}
         when params: %{
-              :currency => String.t(),
-              optional(:coupon) => Stripe.id() | Stripe.Coupon.t(),
-              optional(:customer) => Stripe.id() | Stripe.Customer.t(),
-              optional(:email) => String.t(),
-              optional(:items) => Stripe.List.t(Stripe.OrderItem.t()),
-              optional(:metadata) => Stripe.Types.metadata(),
-              optional(:shipping) => map
-            }
+               :currency => String.t(),
+               optional(:coupon) => Stripe.id() | Stripe.Coupon.t(),
+               optional(:customer) => Stripe.id() | Stripe.Customer.t(),
+               optional(:email) => String.t(),
+               optional(:items) => Stripe.List.t(Stripe.OrderItem.t()),
+               optional(:metadata) => Stripe.Types.metadata(),
+               optional(:shipping) => map
+             }
   def create(%{currency: _} = params, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@endpoint)
@@ -145,12 +145,12 @@ defmodule Stripe.Order do
   """
   @spec update(Stripe.id() | t, params, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
         when params: %{
-              optional(:coupon) => Stripe.id() | Stripe.Coupon.t(),
-              optional(:metadata) => Stripe.Types.metadata(),
-              optional(:selected_shipping_method) => String.t(),
-              optional(:shipping) => map,
-              optional(:status) => String.t()
-            }
+               optional(:coupon) => Stripe.id() | Stripe.Coupon.t(),
+               optional(:metadata) => Stripe.Types.metadata(),
+               optional(:selected_shipping_method) => String.t(),
+               optional(:shipping) => map,
+               optional(:status) => String.t()
+             }
   def update(id, params, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@endpoint <> "/#{get_id!(id)}")
@@ -164,12 +164,13 @@ defmodule Stripe.Order do
   """
   @spec pay(Stripe.id() | t, params, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
         when params: %{
-              optional(:application_fee) => non_neg_integer,
-              optional(:customer) => Stripe.id() | Stripe.Customer.t(),
-              optional(:source) => Stripe.id() | Stripe.Card.t() | Stripe.Customer.t() | card_info,
-              optional(:email) => String.t(),
-              optional(:metadata) => Stripe.Types.metadata()
-            }
+               optional(:application_fee) => non_neg_integer,
+               optional(:customer) => Stripe.id() | Stripe.Customer.t(),
+               optional(:source) =>
+                 Stripe.id() | Stripe.Card.t() | Stripe.Customer.t() | card_info,
+               optional(:email) => String.t(),
+               optional(:metadata) => Stripe.Types.metadata()
+             }
   def pay(id, params \\ %{}, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@endpoint <> "/#{get_id!(id)}/" <> "pay")
@@ -183,8 +184,8 @@ defmodule Stripe.Order do
   """
   @spec return(Stripe.id() | t, params, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
         when params: %{
-              optional(:items) => Stripe.List.t(Stripe.OrderItem.t())
-            }
+               optional(:items) => Stripe.List.t(Stripe.OrderItem.t())
+             }
   def return(id, params \\ %{}, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@endpoint <> "/#{get_id!(id)}/" <> "returns")
@@ -198,15 +199,15 @@ defmodule Stripe.Order do
   """
   @spec list(params, Stripe.options()) :: {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
         when params: %{
-              optional(:customer) => Stripe.id() | Stripe.Customer.t(),
-              optional(:ending_before) => t | Stripe.id(),
-              optional(:ids) => Stripe.List.t(Stripe.id()),
-              optional(:limit) => 1..100,
-              optional(:starting_after) => t | Stripe.id(),
-              optional(:status) => String.t(),
-              optional(:status_transitions) => map,
-              optional(:upstream_ids) => Stripe.List.t(Stripe.id())
-            }
+               optional(:customer) => Stripe.id() | Stripe.Customer.t(),
+               optional(:ending_before) => t | Stripe.id(),
+               optional(:ids) => Stripe.List.t(Stripe.id()),
+               optional(:limit) => 1..100,
+               optional(:starting_after) => t | Stripe.id(),
+               optional(:status) => String.t(),
+               optional(:status_transitions) => map,
+               optional(:upstream_ids) => Stripe.List.t(Stripe.id())
+             }
   def list(params \\ %{}, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@endpoint)

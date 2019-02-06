@@ -15,15 +15,15 @@ defmodule Stripe.FileUpload do
   import Stripe.Request
 
   @type t :: %__MODULE__{
-    id: Stripe.id,
-    object: String.t,
-    created: Stripe.timestamp,
-    filename: String.t | nil,
-    purpose: String.t,
-    size: integer,
-    type: String.t | nil,
-    url: String.t | nil
-  }
+          id: Stripe.id(),
+          object: String.t(),
+          created: Stripe.timestamp(),
+          filename: String.t() | nil,
+          purpose: String.t(),
+          size: integer,
+          type: String.t() | nil,
+          url: String.t() | nil
+        }
 
   defstruct [
     :id,
@@ -43,7 +43,7 @@ defmodule Stripe.FileUpload do
 
   Takes the filepath and the purpose.
   """
-  @spec create(map, Keyword.t) :: {:ok, t} | {:error, Stripe.Error.t}
+  @spec create(map, Keyword.t()) :: {:ok, t} | {:error, Stripe.Error.t()}
   def create(%{file: _, purpose: _} = params, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@plural_endpoint)
@@ -55,7 +55,7 @@ defmodule Stripe.FileUpload do
   @doc """
   Retrieve a file_upload.
   """
-  @spec retrieve(Stripe.id | t, Stripe.options) :: {:ok, t} | {:error, Stripe.Error.t}
+  @spec retrieve(Stripe.id() | t, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
   def retrieve(id, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@plural_endpoint <> "/#{get_id!(id)}")
@@ -66,13 +66,15 @@ defmodule Stripe.FileUpload do
   @doc """
   List all file uploads, going back up to 30 days.
   """
-  @spec list(params, Stripe.options) :: {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t}
-        when params: %{
-               optional(:ending_before) => t | Stripe.id(),
-               optional(:limit) => 1..100,
-               optional(:purpose) => String.t(),
-               optional(:starting_after) => t | Stripe.id()
-             } | %{}
+  @spec list(params, Stripe.options()) :: {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
+        when params:
+               %{
+                 optional(:ending_before) => t | Stripe.id(),
+                 optional(:limit) => 1..100,
+                 optional(:purpose) => String.t(),
+                 optional(:starting_after) => t | Stripe.id()
+               }
+               | %{}
   def list(params \\ %{}, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@plural_endpoint)

@@ -238,20 +238,20 @@ defmodule Stripe.Source do
   Create a source.
   """
   @spec create(params, Keyword.t()) :: {:ok, t} | {:error, Stripe.Error.t()}
-            when params: %{
-              :type => String.t(),
-              optional(:amount) => String.t(),
-              optional(:currency) => String.t(),
-              optional(:flow) => String.t(),
-              optional(:mandate) => map,
-              optional(:metadata) => Stripe.Types.metadata(),
-              optional(:owner) => owner,
-              optional(:receiver) => receiver_flow,
-              optional(:redirect) => redirect_flow,
-              optional(:statement_descriptor) => String.t(),
-              optional(:token) => String.t(),
-              optional(:usage) => String.t()
-            }
+        when params: %{
+               :type => String.t(),
+               optional(:amount) => String.t(),
+               optional(:currency) => String.t(),
+               optional(:flow) => String.t(),
+               optional(:mandate) => map,
+               optional(:metadata) => Stripe.Types.metadata(),
+               optional(:owner) => owner,
+               optional(:receiver) => receiver_flow,
+               optional(:redirect) => redirect_flow,
+               optional(:statement_descriptor) => String.t(),
+               optional(:token) => String.t(),
+               optional(:usage) => String.t()
+             }
   def create(%{} = params, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@plural_endpoint)
@@ -263,10 +263,11 @@ defmodule Stripe.Source do
   @doc """
   Retrieve a source.
   """
-  @spec retrieve(Stripe.id() | t, params, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
+  @spec retrieve(Stripe.id() | t, params, Stripe.options()) ::
+          {:ok, t} | {:error, Stripe.Error.t()}
         when params: %{
-          optional(:client_secret) => String.t(),
-        }
+               optional(:client_secret) => String.t()
+             }
   def retrieve(id, %{} = params, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@plural_endpoint <> "/#{get_id!(id)}")
@@ -282,10 +283,10 @@ defmodule Stripe.Source do
   """
   @spec update(Stripe.id() | t, params, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
         when params: %{
-          optional(:mandate) => map,
-          optional(:metadata) => Stripe.Types.metadata(),
-          optional(:owner) => owner
-        }
+               optional(:mandate) => map,
+               optional(:metadata) => Stripe.Types.metadata(),
+               optional(:owner) => owner
+             }
   def update(id, %{} = params, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@plural_endpoint <> "/#{get_id!(id)}")

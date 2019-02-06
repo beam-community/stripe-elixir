@@ -65,12 +65,13 @@ defmodule Stripe.Invoice do
           webhooks_delivered_at: Stripe.timestamp() | nil
         }
 
-        @type custom_fields :: list(%{
-          name: String.t(),
-          value: String.t()
-        })
+  @type custom_fields ::
+          list(%{
+            name: String.t(),
+            value: String.t()
+          })
 
-        @type invoice_settings :: %{
+  @type invoice_settings :: %{
           custom_fields: custom_fields | nil,
           footer: String.t() | nil
         }

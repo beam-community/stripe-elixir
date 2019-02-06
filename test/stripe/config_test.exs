@@ -23,6 +23,7 @@ defmodule Stripe.ConfigTest do
       :__test,
       {ValueExpansionTestModule, :value, []}
     )
+
     assert(Stripe.Config.resolve(:__test) == "test-test")
   end
 
@@ -32,6 +33,7 @@ defmodule Stripe.ConfigTest do
       :__test,
       {ValueExpansionTestModule, :value, []}
     )
+
     assert(Stripe.Config.resolve(:__fake_test, "test-test") == "test-test")
   end
 

@@ -142,25 +142,27 @@ defmodule Stripe.Charge do
   See the [Stripe docs](https://stripe.com/docs/api#create_charge).
   """
   @spec create(params, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
-        when params: %{
-               :amount => pos_integer,
-               :currency => String.t(),
-               optional(:application_fee) => non_neg_integer,
-               optional(:capture) => boolean,
-               optional(:description) => String.t(),
-               optional(:destination) => %{
-                 :account => Stripe.id() | Stripe.Account.t(),
-                 optional(:amount) => non_neg_integer
-               },
-               optional(:transfer_group) => String.t(),
-               optional(:on_behalf_of) => Stripe.id() | Stripe.Account.t(),
-               optional(:metadata) => map,
-               optional(:receipt_email) => String.t(),
-               optional(:shipping) => Stripe.Types.shipping(),
-               optional(:customer) => Stripe.id() | Stripe.Customer.t(),
-               optional(:source) => Stripe.id() | Stripe.Card.t() | card_info,
-               optional(:statement_descriptor) => String.t()
-             } | %{}
+        when params:
+               %{
+                 :amount => pos_integer,
+                 :currency => String.t(),
+                 optional(:application_fee) => non_neg_integer,
+                 optional(:capture) => boolean,
+                 optional(:description) => String.t(),
+                 optional(:destination) => %{
+                   :account => Stripe.id() | Stripe.Account.t(),
+                   optional(:amount) => non_neg_integer
+                 },
+                 optional(:transfer_group) => String.t(),
+                 optional(:on_behalf_of) => Stripe.id() | Stripe.Account.t(),
+                 optional(:metadata) => map,
+                 optional(:receipt_email) => String.t(),
+                 optional(:shipping) => Stripe.Types.shipping(),
+                 optional(:customer) => Stripe.id() | Stripe.Customer.t(),
+                 optional(:source) => Stripe.id() | Stripe.Card.t() | card_info,
+                 optional(:statement_descriptor) => String.t()
+               }
+               | %{}
   def create(params, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@plural_endpoint)
@@ -203,15 +205,17 @@ defmodule Stripe.Charge do
   See the [Stripe docs](https://stripe.com/docs/api#update_charge).
   """
   @spec update(Stripe.id() | t, params, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
-        when params: %{
-               optional(:customer) => Stripe.id() | Stripe.Customer.t(),
-               optional(:description) => String.t(),
-               optional(:fraud_details) => user_fraud_report,
-               optional(:metadata) => Stripe.Types.metadata(),
-               optional(:receipt_email) => String.t(),
-               optional(:shipping) => Stripe.Types.shipping(),
-               optional(:transfer_group) => String.t()
-             } | %{}
+        when params:
+               %{
+                 optional(:customer) => Stripe.id() | Stripe.Customer.t(),
+                 optional(:description) => String.t(),
+                 optional(:fraud_details) => user_fraud_report,
+                 optional(:metadata) => Stripe.Types.metadata(),
+                 optional(:receipt_email) => String.t(),
+                 optional(:shipping) => Stripe.Types.shipping(),
+                 optional(:transfer_group) => String.t()
+               }
+               | %{}
   def update(id, params, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@plural_endpoint <> "/#{get_id!(id)}")

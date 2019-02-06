@@ -59,13 +59,15 @@ defmodule Stripe.ApplicationFee do
   List all application fees
   """
   @spec list(params, Stripe.options()) :: {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
-        when params: %{
-               optional(:charge) => Stripe.id(),
-               optional(:created) => Stripe.date_query(),
-               optional(:ending_before) => t | Stripe.id(),
-               optional(:limit) => 1..100,
-               optional(:starting_after) => t | Stripe.id()
-             } | %{}
+        when params:
+               %{
+                 optional(:charge) => Stripe.id(),
+                 optional(:created) => Stripe.date_query(),
+                 optional(:ending_before) => t | Stripe.id(),
+                 optional(:limit) => 1..100,
+                 optional(:starting_after) => t | Stripe.id()
+               }
+               | %{}
   def list(params \\ %{}, opts \\ []) do
     new_request(opts)
     |> prefix_expansions()

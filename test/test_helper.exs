@@ -8,7 +8,6 @@ Logger.configure(level: :info)
 
 {:ok, pid} = Stripe.StripeMock.start_link(port: 12123, global: true)
 
-
 Application.put_env(:stripity_stripe, :api_base_url, "http://localhost:12123/v1/")
 Application.put_env(:stripity_stripe, :api_upload_url, "http://localhost:12123/v1/")
 Application.put_env(:stripity_stripe, :api_key, "sk_test_123")
@@ -30,6 +29,7 @@ defmodule Helper do
         # It might be connection refused.
         Process.sleep(250)
         wait_until_stripe_mock_launch()
+
       _ ->
         true
     end

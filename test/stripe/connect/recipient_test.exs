@@ -7,7 +7,9 @@ defmodule Stripe.RecipientTest do
   end
 
   test "is creatable" do
-    assert {:ok, %Stripe.Recipient{}} = Stripe.Recipient.create(%{name: "scooter", type: "standard"})
+    assert {:ok, %Stripe.Recipient{}} =
+             Stripe.Recipient.create(%{name: "scooter", type: "standard"})
+
     assert_stripe_requested(:post, "/v1/recipients")
   end
 

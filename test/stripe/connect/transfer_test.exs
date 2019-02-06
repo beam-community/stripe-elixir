@@ -15,6 +15,7 @@ defmodule Stripe.TransferTest do
         currency: "curr_123",
         destination: "dest_123"
       }
+
       assert {:ok, %Stripe.Transfer{}} = Stripe.Transfer.create(params)
       assert_stripe_requested(:post, "/v1/transfers")
     end

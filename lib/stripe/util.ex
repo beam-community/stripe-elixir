@@ -52,6 +52,7 @@ defmodule Stripe.Util do
 
   @spec object_name_to_module(String.t()) :: module
   def object_name_to_module("file"), do: object_name_to_module("file_upload")
+
   def object_name_to_module(object_name) do
     module_name =
       object_name

@@ -51,7 +51,8 @@ defmodule Stripe.FeeRefund do
   @doc """
   Retrieve a application fee refund.
   """
-  @spec retrieve(Stripe.id() | t, Stripe.id() | t, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
+  @spec retrieve(Stripe.id() | t, Stripe.id() | t, Stripe.options()) ::
+          {:ok, t} | {:error, Stripe.Error.t()}
   def retrieve(id, fee_id, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@endpoint <> "/#{id}/refunds/#{fee_id}")
@@ -64,9 +65,10 @@ defmodule Stripe.FeeRefund do
 
   Takes the `id` and a map of changes.
   """
-  @spec update(Stripe.id() | t, Stripe.id() | t, params, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
+  @spec update(Stripe.id() | t, Stripe.id() | t, params, Stripe.options()) ::
+          {:ok, t} | {:error, Stripe.Error.t()}
         when params: %{
-               optional(:metadata) => Stripe.Types.metadata(),
+               optional(:metadata) => Stripe.Types.metadata()
              }
   def update(id, fee_id, params, opts \\ []) do
     new_request(opts)
@@ -79,7 +81,8 @@ defmodule Stripe.FeeRefund do
   @doc """
   List all transfers.
   """
-  @spec list(Stripe.id() | t, params, Stripe.options()) :: {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
+  @spec list(Stripe.id() | t, params, Stripe.options()) ::
+          {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
         when params: %{
                optional(:ending_before) => t | Stripe.id(),
                optional(:limit) => 1..100,

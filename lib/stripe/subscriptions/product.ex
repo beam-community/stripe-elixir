@@ -37,7 +37,7 @@ defmodule Stripe.Product do
           unit_label: String.t() | nil,
           updated: Stripe.timestamp(),
           url: String.t() | nil
-  }
+        }
 
   defstruct [
     :id,
@@ -68,15 +68,17 @@ defmodule Stripe.Product do
   Create a product.
   """
   @spec create(params, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
-        when params: %{
-          optional(:id) => String.t(),
-          optional(:attributes) => list,
-          :name => String.t(),
-          :type => String.t(),
-          optional(:metadata) => Stripe.Types.metadata(),
-          optional(:statement_descriptor) => String.t(),
-          optional(:unit_label) => String.t()
-        } | %{}
+        when params:
+               %{
+                 optional(:id) => String.t(),
+                 optional(:attributes) => list,
+                 :name => String.t(),
+                 :type => String.t(),
+                 optional(:metadata) => Stripe.Types.metadata(),
+                 optional(:statement_descriptor) => String.t(),
+                 optional(:unit_label) => String.t()
+               }
+               | %{}
   def create(params, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@plural_endpoint)
@@ -102,12 +104,14 @@ defmodule Stripe.Product do
   Takes the `id` and a map of changes.
   """
   @spec update(Stripe.id() | t, params, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
-        when params: %{
-          optional(:attributes) => list,
-          optional(:name) => String.t(),
-          optional(:metadata) => Stripe.Types.metadata(),
-          optional(:statement_descriptor) => String.t()
-        } | %{}
+        when params:
+               %{
+                 optional(:attributes) => list,
+                 optional(:name) => String.t(),
+                 optional(:metadata) => Stripe.Types.metadata(),
+                 optional(:statement_descriptor) => String.t()
+               }
+               | %{}
   def update(id, params, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@plural_endpoint <> "/#{get_id!(id)}")
@@ -131,16 +135,18 @@ defmodule Stripe.Product do
   List all products.
   """
   @spec list(params, Stripe.options()) :: {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
-        when params: %{
-          optional(:active) => boolean,
-          optional(:created) => Stripe.date_query(),
-          optional(:ending_before) => t | Stripe.id(),
-          optional(:limit) => 1..100,
-          optional(:shippable) => boolean,
-          optional(:starting_after) => t | Stripe.id(),
-          optional(:type) => String.t(),
-          optional(:url) => String.t()
-        } | %{}
+        when params:
+               %{
+                 optional(:active) => boolean,
+                 optional(:created) => Stripe.date_query(),
+                 optional(:ending_before) => t | Stripe.id(),
+                 optional(:limit) => 1..100,
+                 optional(:shippable) => boolean,
+                 optional(:starting_after) => t | Stripe.id(),
+                 optional(:type) => String.t(),
+                 optional(:url) => String.t()
+               }
+               | %{}
   def list(params \\ %{}, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@plural_endpoint)

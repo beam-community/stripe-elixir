@@ -3,7 +3,9 @@ defmodule Stripe.TransferReversalTest do
 
   describe "retrieve/2" do
     test "retrieves a transfer" do
-      assert {:ok, %Stripe.TransferReversal{}} = Stripe.TransferReversal.retrieve("transf_123", "rev_123")
+      assert {:ok, %Stripe.TransferReversal{}} =
+               Stripe.TransferReversal.retrieve("transf_123", "rev_123")
+
       assert_stripe_requested(:get, "/v1/transfers/trasnf_123/reversals/rev_123")
     end
   end
@@ -13,7 +15,10 @@ defmodule Stripe.TransferReversalTest do
       params = %{
         amount: 123
       }
-      assert {:ok, %Stripe.TransferReversal{}} = Stripe.TransferReversal.create("transf_123", params)
+
+      assert {:ok, %Stripe.TransferReversal{}} =
+               Stripe.TransferReversal.create("transf_123", params)
+
       assert_stripe_requested(:post, "/v1/transfers/transf_123/reversals")
     end
   end

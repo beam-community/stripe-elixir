@@ -65,7 +65,7 @@ defmodule Stripe.Plan do
           tiers_mode: boolean | nil,
           transform_usage: map | nil,
           trial_period_days: non_neg_integer | nil,
-          usage_type: String.t() | nil,
+          usage_type: String.t() | nil
         }
 
   defstruct [
@@ -89,7 +89,7 @@ defmodule Stripe.Plan do
     :tiers_mode,
     :transform_usage,
     :trial_period_days,
-    :usage_type,
+    :usage_type
   ]
 
   @plural_endpoint "plans"
@@ -98,23 +98,25 @@ defmodule Stripe.Plan do
   Create a plan.
   """
   @spec create(params, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
-        when params: %{
-               :currency => String.t(),
-               :interval => String.t(),
-               :product => Stripe.id() | Stripe.Product.t(),
-               optional(:id) => String.t(),
-               optional(:amount) => non_neg_integer,
-               optional(:active) => boolean,
-               optional(:billing_scheme) => String.t(),
-               optional(:interval_count) => pos_integer,
-               optional(:metadata) => Stripe.Types.metadata(),
-               optional(:nickname) => String.t(),
-               optional(:tiers) => Stripe.List.t(map),
-               optional(:tiers_mode) => String.t(),
-               optional(:transform_usage) => map,
-               optional(:trial_period_days) => non_neg_integer,
-               optional(:usage_type) => String.t(),
-             } | %{}
+        when params:
+               %{
+                 :currency => String.t(),
+                 :interval => String.t(),
+                 :product => Stripe.id() | Stripe.Product.t(),
+                 optional(:id) => String.t(),
+                 optional(:amount) => non_neg_integer,
+                 optional(:active) => boolean,
+                 optional(:billing_scheme) => String.t(),
+                 optional(:interval_count) => pos_integer,
+                 optional(:metadata) => Stripe.Types.metadata(),
+                 optional(:nickname) => String.t(),
+                 optional(:tiers) => Stripe.List.t(map),
+                 optional(:tiers_mode) => String.t(),
+                 optional(:transform_usage) => map,
+                 optional(:trial_period_days) => non_neg_integer,
+                 optional(:usage_type) => String.t()
+               }
+               | %{}
   def create(%{currency: _, interval: _, product: _} = params, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@plural_endpoint)
@@ -140,13 +142,15 @@ defmodule Stripe.Plan do
   Takes the `id` and a map of changes.
   """
   @spec update(Stripe.id() | t, params, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
-        when params: %{
-               optional(:active) => boolean,
-               optional(:metadata) => Stripe.Types.metadata(),
-               optional(:nickname) => String.t(),
-               optional(:product) => Stripe.id() | Stripe.Product.t(),
-               optional(:trial_period_days) => non_neg_integer,
-             } | %{}
+        when params:
+               %{
+                 optional(:active) => boolean,
+                 optional(:metadata) => Stripe.Types.metadata(),
+                 optional(:nickname) => String.t(),
+                 optional(:product) => Stripe.id() | Stripe.Product.t(),
+                 optional(:trial_period_days) => non_neg_integer
+               }
+               | %{}
   def update(id, params, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@plural_endpoint <> "/#{get_id!(id)}")
@@ -170,14 +174,16 @@ defmodule Stripe.Plan do
   List all plans.
   """
   @spec list(params, Stripe.options()) :: {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
-        when params: %{
-               optional(:active) => boolean,
-               optional(:created) => Stripe.date_query(),
-               optional(:ending_before) => t | Stripe.id(),
-               optional(:limit) => 1..100,
-               optional(:product) => Stripe.Product.t() | Stripe.id(),
-               optional(:starting_after) => t | Stripe.id(),
-             } | %{}
+        when params:
+               %{
+                 optional(:active) => boolean,
+                 optional(:created) => Stripe.date_query(),
+                 optional(:ending_before) => t | Stripe.id(),
+                 optional(:limit) => 1..100,
+                 optional(:product) => Stripe.Product.t() | Stripe.id(),
+                 optional(:starting_after) => t | Stripe.id()
+               }
+               | %{}
   def list(params \\ %{}, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@plural_endpoint)

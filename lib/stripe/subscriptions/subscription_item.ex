@@ -108,7 +108,8 @@ defmodule Stripe.SubscriptionItem do
   @doc """
   List all subscriptions.
   """
-  @spec list(Stripe.id(), params, Stripe.options()) :: {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
+  @spec list(Stripe.id(), params, Stripe.options()) ::
+          {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
         when params: %{
                optional(:ending_before) => t | Stripe.id(),
                optional(:limit) => 1..100,

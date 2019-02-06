@@ -3,7 +3,9 @@ defmodule Stripe.ExternalAccountTest do
 
   describe "create/2" do
     test "creates a bank account for an account" do
-      {:ok, _} = Stripe.ExternalAccount.create(%{account: "acct_123", token: "tok_stripetestbank"})
+      {:ok, _} =
+        Stripe.ExternalAccount.create(%{account: "acct_123", token: "tok_stripetestbank"})
+
       assert_stripe_requested(:post, "/v1/accounts/acct_123/external_accounts")
     end
 
@@ -52,14 +54,18 @@ defmodule Stripe.ExternalAccountTest do
   describe "list/3" do
     @tag :skip
     test "lists all bank accounts for an account" do
-      {:ok, %Stripe.List{data: bank_accounts}} = Stripe.ExternalAccount.list(:bank_account, %{account: "acct_123"})
+      {:ok, %Stripe.List{data: bank_accounts}} =
+        Stripe.ExternalAccount.list(:bank_account, %{account: "acct_123"})
+
       assert_stripe_requested(:get, "/v1/accounts/acct_123/external_accounts?object=bank_account")
       assert is_list(bank_accounts)
     end
 
     @tag :skip
     test "lists all cards for an account" do
-      {:ok, %Stripe.List{data: cards}} = Stripe.ExternalAccount.list(:card, %{account: "acct_123"})
+      {:ok, %Stripe.List{data: cards}} =
+        Stripe.ExternalAccount.list(:card, %{account: "acct_123"})
+
       assert_stripe_requested(:get, "/v1/accounts/acct_123/external_accounts?object=card")
       assert is_list(cards)
     end

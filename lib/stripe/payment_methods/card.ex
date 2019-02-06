@@ -102,10 +102,10 @@ defmodule Stripe.Card do
   """
   @spec create(params, Keyword.t()) :: {:ok, t} | {:error, Stripe.Error.t()}
         when params: %{
-              :customer => Stripe.id() | Stripe.Customer.t(),
-              :source => Stripe.id() | Stripe.Source.t(),
-              optional(:metadata) => Stripe.Types.metadata(),
-            }
+               :customer => Stripe.id() | Stripe.Customer.t(),
+               :source => Stripe.id() | Stripe.Source.t(),
+               optional(:metadata) => Stripe.Types.metadata()
+             }
   def create(%{customer: _, source: _} = params, opts \\ []) do
     new_request(opts)
     |> put_endpoint(params |> plural_endpoint())
@@ -134,19 +134,19 @@ defmodule Stripe.Card do
   """
   @spec update(Stripe.id() | t, params, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
         when params: %{
-              :id => String.t(),
-              :customer => String.t(),
-              optional(:address_city) => String.t(),
-              optional(:address_country) => String.t(),
-              optional(:address_line1) => String.t(),
-              optional(:address_line2) => String.t(),
-              optional(:address_state) => String.t(),
-              optional(:address_zip) => String.t(),
-              optional(:exp_month) => String.t(),
-              optional(:exp_year) => String.t(),
-              optional(:metadata) => Stripe.Types.metadata(),
-              optional(:name) => String.t(),
-            }
+               :id => String.t(),
+               :customer => String.t(),
+               optional(:address_city) => String.t(),
+               optional(:address_country) => String.t(),
+               optional(:address_line1) => String.t(),
+               optional(:address_line2) => String.t(),
+               optional(:address_state) => String.t(),
+               optional(:address_zip) => String.t(),
+               optional(:exp_month) => String.t(),
+               optional(:exp_year) => String.t(),
+               optional(:metadata) => Stripe.Types.metadata(),
+               optional(:name) => String.t()
+             }
   def update(id, %{customer: _} = params, opts \\ []) do
     endpoint = params |> plural_endpoint()
 
@@ -175,11 +175,11 @@ defmodule Stripe.Card do
   """
   @spec list(params, Stripe.options()) :: {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
         when params: %{
-              :customer => Stripe.id() | Stripe.Customer.t(),
-              optional(:ending_before) => t | Stripe.id(),
-              optional(:limit) => 1..100,
-              optional(:starting_after) => t | Stripe.id(),
-            }
+               :customer => Stripe.id() | Stripe.Customer.t(),
+               optional(:ending_before) => t | Stripe.id(),
+               optional(:limit) => 1..100,
+               optional(:starting_after) => t | Stripe.id()
+             }
   def list(%{customer: _} = params, opts \\ []) do
     endpoint = params |> plural_endpoint()
     params = params |> Map.put(:object, "card")

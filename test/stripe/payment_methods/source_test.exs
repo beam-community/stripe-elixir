@@ -24,8 +24,7 @@ defmodule Stripe.SourceTest do
 
   describe "attach/2" do
     test "attaches a source to a customer" do
-      assert {:ok, _} =
-               Stripe.Source.attach(%{customer: "cus_123", source: "src_123"})
+      assert {:ok, _} = Stripe.Source.attach(%{customer: "cus_123", source: "src_123"})
 
       assert_stripe_requested(:post, "/v1/customers/cus_123/sources")
     end

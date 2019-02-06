@@ -93,7 +93,8 @@ defmodule Stripe.ExternalAccount do
 
   Takes either `:bank_account` or `:card` to determine which object to list.
   """
-  @spec list(atom, params, Stripe.options()) :: {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
+  @spec list(atom, params, Stripe.options()) ::
+          {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
         when params: %{
                :account => Stripe.id(),
                optional(:ending_before) => t | Stripe.id(),
@@ -101,18 +102,21 @@ defmodule Stripe.ExternalAccount do
                optional(:starting_after) => t | Stripe.id()
              }
   def list(atom, params, opts \\ [])
+
   def list(:bank_account, %{account: _} = params, opts) do
     endpoint = params |> accounts_plural_endpoint()
     params = params |> Map.put(:object, "bank_account")
     do_list(endpoint, params, opts)
   end
+
   def list(:card, %{account: _} = params, opts) do
     endpoint = params |> accounts_plural_endpoint()
     params = params |> Map.put(:object, "card")
     do_list(endpoint, params, opts)
   end
 
-  @spec do_list(String.t, map, Stripe.options()) :: {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
+  @spec do_list(String.t(), map, Stripe.options()) ::
+          {:ok, Stripe.List.t(t)} | {:error, Stripe.Error.t()}
   defp do_list(endpoint, params, opts) do
     new_request(opts)
     |> put_endpoint(endpoint)

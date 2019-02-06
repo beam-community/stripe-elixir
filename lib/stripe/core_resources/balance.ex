@@ -55,7 +55,8 @@ defmodule Stripe.Balance do
 
   See the [Stripe docs](https://stripe.com/docs/api#balance_transaction_retrieve).
   """
-  @spec retrieve_transaction(String.t(), Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
+  @spec retrieve_transaction(String.t(), Stripe.options()) ::
+          {:ok, t} | {:error, Stripe.Error.t()}
   def retrieve_transaction(id, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@endpoint <> "/history/" <> id)

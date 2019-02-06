@@ -52,21 +52,24 @@ defmodule Stripe.LineItem do
   @doc """
   Retrieve an invoice line item.
   """
-  @spec retrieve(Stripe.id() | t, params, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
-        when params: %{
-               optional(:coupon) => Stripe.id() | Stripe.Coupon.t(),
-               optional(:customer) => Stripe.id() | Stripe.Customer.t(),
-               optional(:ending_before) => t | Stripe.id(),
-               optional(:limit) => 1..100,
-               optional(:starting_after) => t | Stripe.id(),
-               optional(:subscription) => Stripe.id() | Stripe.Subscription.t(),
-               optional(:subscription_billing_cycle_anchor) => integer,
-               optional(:subscription_items) => Stripe.List.t(Stripe.SubscriptionItem.t()),
-               optional(:subscription_prorate) => boolean,
-               optional(:subscription_proration_date) => Stripe.timestamp(),
-               optional(:subscription_tax_percent) => integer,
-               optional(:subscription_trial_from_plan) => boolean
-             } | %{}
+  @spec retrieve(Stripe.id() | t, params, Stripe.options()) ::
+          {:ok, t} | {:error, Stripe.Error.t()}
+        when params:
+               %{
+                 optional(:coupon) => Stripe.id() | Stripe.Coupon.t(),
+                 optional(:customer) => Stripe.id() | Stripe.Customer.t(),
+                 optional(:ending_before) => t | Stripe.id(),
+                 optional(:limit) => 1..100,
+                 optional(:starting_after) => t | Stripe.id(),
+                 optional(:subscription) => Stripe.id() | Stripe.Subscription.t(),
+                 optional(:subscription_billing_cycle_anchor) => integer,
+                 optional(:subscription_items) => Stripe.List.t(Stripe.SubscriptionItem.t()),
+                 optional(:subscription_prorate) => boolean,
+                 optional(:subscription_proration_date) => Stripe.timestamp(),
+                 optional(:subscription_tax_percent) => integer,
+                 optional(:subscription_trial_from_plan) => boolean
+               }
+               | %{}
   def retrieve(id, params \\ %{}, opts \\ []) do
     new_request(opts)
     |> put_endpoint("invoices" <> "/#{get_id!(id)}/" <> "lines")
