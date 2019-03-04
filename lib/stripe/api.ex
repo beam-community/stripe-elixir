@@ -165,9 +165,11 @@ defmodule Stripe.API do
 
   def request(body, method, endpoint, headers, opts) do
     {expansion, opts} = Keyword.pop(opts, :expand)
-    base_url = get_base_url()
+    {idempotency_key, opts} = Keyword.pop(opts, :idempotency_key)
 
+    base_url = get_base_url()
     req_url = add_object_expansion("#{base_url}#{endpoint}", expansion)
+    headers = add_idempotency_header(idempotency_key, headers, method)
 
     req_body =
       body
@@ -317,4 +319,12 @@ defmodule Stripe.API do
   end
 
   defp add_object_expansion(url, _), do: url
+
+  defp add_idempotency_header(nil, headers, _), do: headers
+
+  defp add_idempotency_header(idempotency_key, headers, :post) do
+    Map.put(headers, "Idempotency-Key", idempotency_key)
+  end
+
+  defp add_idempotency_header(_, headers, _), do: headers
 end
