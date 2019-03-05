@@ -51,7 +51,8 @@ defmodule Stripe.Util do
   def atomize_key(k), do: k
 
   @spec object_name_to_module(String.t()) :: module
-  def object_name_to_module("file"), do: object_name_to_module("file_upload")
+  def object_name_to_module("checkout.session"), do: Stripe.Session
+  def object_name_to_module("file"), do: Stripe.FileUpload
 
   def object_name_to_module(object_name) do
     module_name =
@@ -59,7 +60,7 @@ defmodule Stripe.Util do
       |> String.split("_")
       |> Enum.map_join("", &String.capitalize/1)
 
-    Module.concat("Stripe", module_name)
+    Module.concat(Stripe, module_name)
   end
 
   @spec module_to_string(module) :: String.t()

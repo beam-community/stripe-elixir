@@ -16,7 +16,7 @@ defmodule Stripe.API do
   @typep http_failure :: {:error, term}
 
   @pool_name __MODULE__
-  @api_version "2018-11-08"
+  @api_version "2018-11-08; checkout_sessions_beta=v1"
 
   @doc """
   In config.exs your implicit or expicit configuration is:

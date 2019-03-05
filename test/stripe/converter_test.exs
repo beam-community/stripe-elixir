@@ -243,4 +243,17 @@ defmodule Stripe.ConverterTest do
 
     assert result == expected_result
   end
+
+  test "converts a checkout.session response properly" do
+    expected_result = %Stripe.Session{
+      id: "CdWP8EBmSp1tJNIw4ZLF6w3XKd8MNKkEvlnSK7QmwFlDZ8rrjqBn9VI9vKiVdhfE",
+      livemode: false,
+      object: "checkout.session"
+    }
+
+    fixture = Helper.load_fixture("session.json")
+    result = Converter.convert_result(fixture)
+
+    assert result == expected_result
+  end
 end

@@ -19,6 +19,7 @@ defmodule Stripe.Converter do
     bank_account
     card
     charge
+    checkout.session
     country_spec
     coupon
     customer
