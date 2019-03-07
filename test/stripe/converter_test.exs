@@ -57,6 +57,42 @@ defmodule Stripe.ConverterTest do
     assert result == expected_result
   end
 
+  test "converts review.opened event properly" do
+    expected_result = %Stripe.Event{
+      account: "acct_445dwy73iNyGMfgu",
+      api_version: "2019-02-19",
+      created: 1551702604,
+      data: %{
+        object: %Stripe.Review{
+          billing_zip: nil,
+          charge: "ch_1EAFvj73iNyGMfgutk44a8nD",
+          closed_reason: nil,
+          created: 1551702603,
+          id: "prv_1EAFvj73iNyGMfgu81yzEb0D",
+          livemode: false,
+          object: "review",
+          open: true,
+          opened_reason: "rule",
+          payment_intent: nil,
+          reason: "rule"
+        }
+      },
+      id: "evt_1EAFvk73iNyGMfguDACcQT5X",
+      livemode: false,
+      object: "event",
+      pending_webhooks: 4,
+      request: %{
+        id: "req_3zmMCPEWZ2R24x",
+        idempotency_key: "1551702602859892291_xgpCTQ"
+      },
+      type: "review.opened"
+    }
+    fixture = Helper.load_fixture("review_opened.json")
+    result = Converter.convert_result(fixture)
+
+    assert result == expected_result
+  end
+
   test "converts a list response properly" do
     expected_result = %Stripe.List{
       object: "list",

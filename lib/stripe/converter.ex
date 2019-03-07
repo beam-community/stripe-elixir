@@ -40,6 +40,7 @@ defmodule Stripe.Converter do
     product
     recipient
     refund
+    review
     sku
     source
     subscription
