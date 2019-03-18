@@ -17,8 +17,8 @@ defmodule Stripe.Review do
   @type ip_address_location :: %{
           city: String.t(),
           country: String.t(),
-          latitude: Float.t(),
-          longitude: Float.t(),
+          latitude: Float,
+          longitude: Float,
           region: String.t()
   }
 
