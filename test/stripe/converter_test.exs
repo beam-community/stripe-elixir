@@ -69,12 +69,26 @@ defmodule Stripe.ConverterTest do
           closed_reason: nil,
           created: 1551702603,
           id: "prv_1EAFvj73iNyGMfgu81yzEb0D",
+          ip_address: "172.16.1.4",
+          ip_address_location: %{
+            city: "Samara",
+            country: "RU",
+            latitude: 34,
+            longitude: 33,
+            region: "65"
+          },
           livemode: false,
           object: "review",
           open: true,
           opened_reason: "rule",
           payment_intent: nil,
-          reason: "rule"
+          reason: "rule",
+          session: %{
+            browser: "Firefox",
+            device: "Other",
+            platform: "Mac OS X 10.14",
+            version: "65.0"
+          }
         }
       },
       id: "evt_1EAFvk73iNyGMfguDACcQT5X",

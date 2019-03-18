@@ -7,6 +7,21 @@ defmodule Stripe.Review do
 
   use Stripe.Entity
 
+  @type session :: %{
+          browser: String.t(),
+          device: String.t(),
+          platform: String.t(),
+          version: String.t()
+        }
+
+  @type ip_address_location :: %{
+          city: String.t(),
+          country: String.t(),
+          latitude: Float.t(),
+          longitude: Float.t(),
+          region: String.t()
+  }
+
   @type t :: %__MODULE__{
           id: Stripe.id(),
           object: String.t(),
@@ -14,11 +29,14 @@ defmodule Stripe.Review do
           charge: Stripe.id() | Stripe.Charge.t(),
           closed_reason: String.t(),
           created: Stripe.timestamp(),
+          ip_address: String.t(),
+          ip_address_location: ip_address_location,
           livemode: boolean,
           open: boolean,
           opened_reason: String.t(),
           payment_intent: String.t(),
-          reason: String.t()
+          reason: String.t(),
+          session: session
         }
 
   defstruct [
@@ -28,10 +46,13 @@ defmodule Stripe.Review do
     :charge,
     :closed_reason,
     :created,
+    :ip_address,
+    :ip_address_location,
     :livemode,
     :open,
     :opened_reason,
     :payment_intent,
-    :reason
+    :reason,
+    :session
   ]
 end
