@@ -35,6 +35,7 @@ defmodule Stripe.Converter do
     oauth
     order
     order_return
+    payment_intent
     payout
     plan
     product

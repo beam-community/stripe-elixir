@@ -52,6 +52,11 @@ defmodule Stripe.Charge do
           address_zip: String.t() | nil
         }
 
+  @type transfer_data :: %{
+          :amount => non_neg_integer,
+          :destination => String.t()
+        }
+
   @type t :: %__MODULE__{
           id: Stripe.id(),
           object: String.t(),
@@ -77,6 +82,7 @@ defmodule Stripe.Charge do
           order: Stripe.id() | Stripe.Order.t() | nil,
           outcome: charge_outcome | nil,
           paid: boolean,
+          payment_intent: Stripe.id() | Stripe.PaymentIntent.t() | nil,
           receipt_email: String.t() | nil,
           receipt_number: String.t() | nil,
           receipt_url: String.t() | nil,
@@ -89,6 +95,7 @@ defmodule Stripe.Charge do
           statement_descriptor: String.t() | nil,
           status: String.t(),
           transfer: Stripe.id() | Stripe.Transfer.t() | nil,
+          transfer_data: transfer_data | nil,
           transfer_group: String.t() | nil
         }
 
@@ -117,6 +124,7 @@ defmodule Stripe.Charge do
     :order,
     :outcome,
     :paid,
+    :payment_intent,
     :receipt_email,
     :receipt_number,
     :receipt_url,
@@ -129,6 +137,7 @@ defmodule Stripe.Charge do
     :statement_descriptor,
     :status,
     :transfer,
+    :transfer_data,
     :transfer_group
   ]
 
@@ -155,6 +164,7 @@ defmodule Stripe.Charge do
                    :account => Stripe.id() | Stripe.Account.t(),
                    optional(:amount) => non_neg_integer
                  },
+                 optional(:transfer_data) => transfer_data,
                  optional(:transfer_group) => String.t(),
                  optional(:on_behalf_of) => Stripe.id() | Stripe.Account.t(),
                  optional(:metadata) => map,
