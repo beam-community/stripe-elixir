@@ -159,7 +159,7 @@ defmodule Stripe.PaymentIntent do
           {:ok, t} | {:error, Stripe.Error.t()}
         when params:
                %{
-                 :client_secret => String.t()
+                 optional(:client_secret) => String.t()
                }
                | %{}
   def retrieve(id, params, opts \\ []) do
@@ -213,7 +213,7 @@ defmodule Stripe.PaymentIntent do
           {:ok, t} | {:error, Stripe.Error.t()}
         when params:
                %{
-                 :client_secret => String.t(),
+                 optional(:client_secret) => String.t(),
                  optional(:receipt_email) => String.t(),
                  optional(:return_url) => String.t(),
                  optional(:save_payment_method) => boolean,
