@@ -32,10 +32,16 @@ The actively developed line of releases is `2.x.x` and is contained within the `
 
 ## Installation
 
-Install the dependency:
+Install the dependency by version:
 
 ```ex
 {:stripity_stripe, "~> 2.0.0"}
+```
+
+Or by commit reference (still awaiting hex publish rights so this is your best best for now):
+
+```ex
+{:stripity_stripe, git: "https://github.com/code-corps/stripity_stripe", ref: "8c091d4278d29a917bacef7bb2f0606317fcc025"}
 ```
 
 Next, add to your applications:
