@@ -117,6 +117,12 @@ We will get the full object back as well.
 
 For details on which objects can be expanded check out the [stripe object expansion](https://stripe.com/docs/api#expanding_objects) docs.
 
+# Testing
+
+To run the tests you'll need to install [`stripe-mock`](https://github.com/stripe/stripe-mock) It is a mock HTTP server that responds like the real Stripe API. It's powered by the [Stripe OpenAPI specification](https://github.com/stripe/openapi), which is generated from within Stripe's API.
+
+Start `stripe-mock` before running the tests with `mix test`.
+
 # Documentation for 1.x.x
 
 <details><summary>Click to expand</summary>
@@ -152,6 +158,7 @@ use Mix.Config
 config :stripity_stripe, secret_key: "YOUR SECRET KEY"
 config :stripity_stripe, platform_client_id: "YOUR CONNECT PLATFORM CLIENT ID"
 ```
+
 
 ## Testing
 
