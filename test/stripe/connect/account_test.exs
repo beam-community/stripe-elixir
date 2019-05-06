@@ -38,6 +38,8 @@ defmodule Stripe.AccountTest do
   test "is rejectable" do
     {:ok, account} = Stripe.Account.create(%{metadata: %{}, type: "standard"})
 
+    assert_stripe_requested(:post, "/v1/accounts")
+
     assert {:ok, %Stripe.Account{} = rejected_account} =
              Stripe.Account.reject(account, "terms_of_service")
 

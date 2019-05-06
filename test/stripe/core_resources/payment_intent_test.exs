@@ -42,6 +42,8 @@ defmodule Stripe.PaymentIntentTest do
   test "is captureable" do
     {:ok, %Stripe.PaymentIntent{} = payment_intent} = Stripe.PaymentIntent.retrieve("pi_123", %{})
 
+    assert_stripe_requested(:get, "/v1/payment_intents/pi_123")
+
     assert {:ok, %Stripe.PaymentIntent{}} =
              Stripe.PaymentIntent.capture(payment_intent, %{amount_to_capture: 1000})
 

@@ -19,6 +19,8 @@ defmodule Stripe.CustomerTest do
 
   test "is deletable" do
     {:ok, customer} = Stripe.Customer.retrieve("cus_123")
+    assert_stripe_requested(:get, "/v1/customers/#{customer.id}")
+
     assert {:ok, %Stripe.Customer{}} = Stripe.Customer.delete(customer)
     assert_stripe_requested(:delete, "/v1/customers/#{customer.id}")
   end
@@ -33,6 +35,8 @@ defmodule Stripe.CustomerTest do
   describe "delete_discount/2" do
     test "deletes a customer's discount" do
       {:ok, customer} = Stripe.Customer.retrieve("sub_123")
+      assert_stripe_requested(:get, "/v1/customers/#{customer.id}")
+
       assert {:ok, _} = Stripe.Customer.delete_discount("sub_123")
       assert_stripe_requested(:delete, "/v1/customers/#{customer.id}/discount")
     end

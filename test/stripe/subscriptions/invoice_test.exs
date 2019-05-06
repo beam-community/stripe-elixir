@@ -23,7 +23,7 @@ defmodule Stripe.InvoiceTest do
       assert_stripe_requested(
         :get,
         "/v1/invoices/upcoming",
-        query: %{customer: "cust_123", subscription: "sub_123"}
+        query: %{customer: "cus_123", subscription: "sub_123"}
       )
     end
 
@@ -36,9 +36,9 @@ defmodule Stripe.InvoiceTest do
         :get,
         "/v1/invoices/upcoming",
         query: %{
-          :customer => "cust_123",
-          :"susbscription_items[][plan]" => "gold",
-          :"subscription_items[][quantity]" => 2
+          :customer => "cus_123",
+          :"subscription_items[0][plan]" => "gold",
+          :"subscription_items[0][quantity]" => 2
         }
       )
     end
@@ -66,12 +66,16 @@ defmodule Stripe.InvoiceTest do
   describe "pay/3" do
     test "pays an invoice" do
       {:ok, invoice} = Stripe.Invoice.retrieve("in_123")
+      assert_stripe_requested(:get, "/v1/invoices/#{invoice.id}")
+
       assert {:ok, %Stripe.Invoice{} = _paid_invoice} = Stripe.Invoice.pay(invoice, %{})
       assert_stripe_requested(:post, "/v1/invoices/#{invoice.id}/pay")
     end
 
     test "pays an invoice with a specific source" do
       {:ok, invoice} = Stripe.Invoice.retrieve("in_123")
+      assert_stripe_requested(:get, "/v1/invoices/#{invoice.id}")
+
       params = %{source: "src_123"}
       assert {:ok, %Stripe.Invoice{} = _paid_invoice} = Stripe.Invoice.pay(invoice, params)
 
@@ -91,6 +95,8 @@ defmodule Stripe.InvoiceTest do
   describe "void/2" do
     test "voids an invoice" do
       {:ok, invoice} = Stripe.Invoice.retrieve("in_123")
+      assert_stripe_requested(:get, "/v1/invoices/#{invoice.id}")
+
       assert {:ok, %Stripe.Invoice{} = _voided_invoice} = Stripe.Invoice.void(invoice)
       assert_stripe_requested(:post, "/v1/invoices/#{invoice.id}/void")
     end

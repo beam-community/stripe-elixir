@@ -26,7 +26,7 @@ defmodule Stripe.OrderTest do
   describe "pay/3" do
     test "is payable" do
       assert {:ok, %Stripe.Order{}} = Stripe.Order.pay("order_123")
-      assert_stripe_requested(:pay, "/v1/orders/order_123/pay")
+      assert_stripe_requested(:post, "/v1/orders/order_123/pay")
     end
 
     @tag :skip
@@ -36,14 +36,14 @@ defmodule Stripe.OrderTest do
       }
 
       assert {:ok, %Stripe.Order{}} = Stripe.Order.pay("order_123", params)
-      assert_stripe_requested(:pay, "/v1/orders/order_123/pay")
+      assert_stripe_requested(:post, "/v1/orders/order_123/pay")
     end
   end
 
   describe "return/3" do
     test "is returnable" do
       assert {:ok, %Stripe.OrderReturn{}} = Stripe.Order.return("order_123")
-      assert_stripe_requested(:pay, "/v1/orders/order_123/returns")
+      assert_stripe_requested(:post, "/v1/orders/order_123/returns")
     end
   end
 
@@ -58,7 +58,7 @@ defmodule Stripe.OrderTest do
     test "is listable with params" do
       params = %{status: "paid"}
       assert {:ok, %Stripe.List{data: orders}} = Stripe.Order.list(params)
-      assert_stripe_requested(:get, "/v1/orders")
+      assert_stripe_requested(:get, "/v1/orders", query: params)
       assert is_list(orders)
       assert %Stripe.Order{} = hd(orders)
     end

@@ -14,6 +14,8 @@ defmodule Stripe.DisputeTest do
 
   test "is closeable" do
     {:ok, dispute} = Stripe.Dispute.retrieve("cus_123")
+    assert_stripe_requested(:get, "/v1/disputes/#{dispute.id}")
+
     assert {:ok, %Stripe.Dispute{}} = Stripe.Dispute.close(dispute)
     assert_stripe_requested(:post, "/v1/disputes/#{dispute.id}/close")
   end

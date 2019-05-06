@@ -35,7 +35,7 @@ defmodule Stripe.PayoutTest do
   describe "cancel/1" do
     test "cancels a payout" do
       assert {:ok, %Stripe.Payout{}} = Stripe.Payout.cancel("py_123")
-      assert_stripe_requested(:get, "/v1/payouts/cancel")
+      assert_stripe_requested(:post, "/v1/payouts/py_123/cancel")
     end
   end
 end

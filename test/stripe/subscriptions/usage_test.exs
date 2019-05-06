@@ -53,7 +53,7 @@ defmodule Stripe.SubscriptionItem.UsageTest do
       assert {:ok, %Stripe.List{data: usages}} =
                Stripe.SubscriptionItem.Usage.list(item_id, params)
 
-      assert_stripe_requested(:get, "/v1/subscription_items/#{item_id}/usage_record_summaries")
+      assert_stripe_requested(:get, "/v1/subscription_items/#{item_id}/usage_record_summaries?limit=10")
       assert is_list(usages)
       assert %{subscription_item: _sub_item_id} = hd(usages)
     end

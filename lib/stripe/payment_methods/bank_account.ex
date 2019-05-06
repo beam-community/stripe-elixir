@@ -144,7 +144,7 @@ defmodule Stripe.BankAccount do
              }
   def list(%{customer: _} = params, opts \\ []) do
     endpoint = params |> plural_endpoint()
-    params = params |> Map.put(:object, "card")
+    params = params |> Map.put(:object, "bank_account")
 
     new_request(opts)
     |> put_endpoint(endpoint)

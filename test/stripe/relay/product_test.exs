@@ -40,7 +40,7 @@ defmodule Stripe.Relay.ProductTest do
     test "lists all products with params" do
       params = %{active: false}
       assert {:ok, %Stripe.List{data: products}} = Stripe.Product.list(params)
-      assert_stripe_requested(:get, "/v1/products")
+      assert_stripe_requested(:get, "/v1/products", query: %{active: false})
       assert is_list(products)
       assert %Stripe.Product{} = hd(products)
     end
@@ -49,6 +49,8 @@ defmodule Stripe.Relay.ProductTest do
   describe "delete/1" do
     test "deletes a product" do
       {:ok, product} = Stripe.Product.retrieve("Plus")
+      assert_stripe_requested(:get, "/v1/products/#{product.id}")
+
       assert {:ok, _} = Stripe.Product.delete("Plus")
       assert_stripe_requested(:delete, "/v1/products/#{product.id}")
     end
