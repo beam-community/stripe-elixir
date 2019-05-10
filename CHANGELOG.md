@@ -1,5 +1,29 @@
 # Latest
 
+## 2.2.3
+
+- [Configurable json serializer - You can now use Jason instead of Poison](https://github.com/code-corps/stripity_stripe/pull/446)
+- [Support for voiding invoices](https://github.com/code-corps/stripity_stripe/pull/444)
+- [Use singular time units in System.system_time/1](https://github.com/code-corps/stripity_stripe/pull/450)
+- [Expanded configuration options](https://github.com/code-corps/stripity_stripe/pull/447)
+- [Add invoice settings to customer/invoice objects](https://github.com/code-corps/stripity_stripe/pull/451)
+- [Upgrade to 2018-11-08 Stripe API](https://github.com/code-corps/stripity_stripe/pull/439)
+- [Fixed bug in `Usage.retrieve`](https://github.com/code-corps/stripity_stripe/pull/433)
+- [Add elixir 1.8 to test matrix](https://github.com/code-corps/stripity_stripe/pull/449)
+- [Add authorization header api key to deauthorization endpoint]((https://github.com/code-corps/stripity_stripe/pull/465)
+- [Add support for idempotent post requests](https://github.com/code-corps/stripity_stripe/pull/461)
+- [Support new Checkout flow](https://github.com/code-corps/stripity_stripe/pull/466)
+- [Add `receipt_url` to the return Charge data](https://github.com/code-corps/stripity_stripe/pull/467)
+- [Fixed some bugs in `Review` struct fields](https://github.com/code-corps/stripity_stripe/pull/468)
+- [Add basic support for payment intents](https://github.com/code-corps/stripity_stripe/pull/470)
+- [Make `client_secret` optional](https://github.com/code-corps/stripity_stripe/pull/473)
+- [Update hackney requirement to 1.15](https://github.com/code-corps/stripity_stripe/pull/475)
+- [Upgrade to ex doc 0.20](https://github.com/code-corps/stripity_stripe/pull/486)
+- [Upgrade stripe mock to 0.55](https://github.com/code-corps/stripity_stripe/pull/485)
+- [Remove unused Bypass dependency](https://github.com/code-corps/stripity_stripe/pull/88)
+- [Implement `assert_stripe_requested/3` test helper](https://github.com/code-corps/stripity_stripe/pull/487)
+- Misc documentation improvements
+
 ## 2.2.2
 
 - [Upgrade stripe-mock 0.38](https://github.com/code-corps/stripity_stripe/pull/436)
