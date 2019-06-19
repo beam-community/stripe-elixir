@@ -56,15 +56,14 @@ defmodule Stripe.Mixfile do
 
   defp deps do
     [
-      {:bypass, "~> 0.8.1", only: :test},
-      {:dialyxir, "1.0.0-rc.4", only: [:dev, :test], runtime: false},
-      {:earmark, "~> 1.2.5", only: :dev},
-      {:ex_doc, "~> 0.18.3", only: :dev},
+      {:bypass, "~> 1.0", only: :test},
+      {:dialyxir, "1.0.0-rc.6", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.20", only: :dev},
       {:excoveralls, "~> 0.8.1", only: :test},
       {:hackney, "~> 1.13"},
-      {:inch_ex, "~> 0.5", only: [:dev, :test]},
-      {:mox, "~> 0.4", only: :test},
-      {:poison, "~> 2.0 or ~> 3.0"},
+      {:inch_ex, "~> 2.0", only: [:dev, :test]},
+      {:mox, "~> 0.5", only: :test},
+      {:poison, "~> 4.0"},
       {:uri_query, "~> 0.1.2"},
       {:exexec, "~> 0.1.0", only: :test}
     ]
