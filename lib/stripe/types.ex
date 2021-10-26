@@ -20,6 +20,12 @@ defmodule Stripe.Types do
           type: String.t()
         }
 
+  @type location :: %{
+          country: String.t(),
+          source: String.t(),
+          state: String.t()
+        }
+
   @type metadata :: %{
           optional(String.t()) => String.t()
         }
@@ -30,6 +36,12 @@ defmodule Stripe.Types do
           name: String.t(),
           phone: String.t() | nil,
           tracking_number: String.t() | nil
+        }
+
+  @type tax :: %{
+          automatic_tax: String.t(),
+          ip_address: String.t(),
+          location: location()
         }
 
   @type tax_info :: %{

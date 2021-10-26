@@ -19,6 +19,7 @@ defmodule Stripe.Customer do
           id: Stripe.id(),
           object: String.t(),
           account_balance: integer,
+          address: Stripe.Types.address() | nil,
           created: Stripe.timestamp(),
           currency: String.t() | nil,
           default_source: Stripe.id() | Stripe.Source.t() | nil,
@@ -33,6 +34,7 @@ defmodule Stripe.Customer do
           shipping: Stripe.Types.shipping() | nil,
           sources: Stripe.List.t(Stripe.Source.t()),
           subscriptions: Stripe.List.t(Stripe.Subscription.t()),
+          tax: Stripe.Types.tax() | nil,
           tax_info: Stripe.Types.tax_info() | nil,
           tax_info_verification: Stripe.Types.tax_info_verification() | nil
         }
@@ -41,6 +43,7 @@ defmodule Stripe.Customer do
     :id,
     :object,
     :account_balance,
+    :address,
     :created,
     :currency,
     :default_source,
@@ -55,6 +58,7 @@ defmodule Stripe.Customer do
     :shipping,
     :sources,
     :subscriptions,
+    :tax,
     :tax_info,
     :tax_info_verification
   ]
