@@ -40,7 +40,8 @@ defmodule Stripe.Subscription do
           status: String.t(),
           tax_percent: float | nil,
           trial_end: Stripe.timestamp() | nil,
-          trial_start: Stripe.timestamp() | nil
+          trial_start: Stripe.timestamp() | nil,
+          trial_settings: map
         }
 
   defstruct [
@@ -68,7 +69,8 @@ defmodule Stripe.Subscription do
     :status,
     :tax_percent,
     :trial_end,
-    :trial_start
+    :trial_start,
+    :trial_settings
   ]
 
   @plural_endpoint "subscriptions"
