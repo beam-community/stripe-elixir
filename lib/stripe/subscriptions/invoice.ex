@@ -184,7 +184,7 @@ defmodule Stripe.Invoice do
   Retrieve an upcoming invoice.
   """
   @spec upcoming(map, Stripe.options()) :: {:ok, t} | {:error, Stripe.Error.t()}
-  def upcoming(params = %{customer: _customer}, opts \\ []) do
+  def upcoming(params, opts \\ []) do
     new_request(opts)
     |> put_endpoint(@plural_endpoint <> "/upcoming")
     |> put_method(:get)
