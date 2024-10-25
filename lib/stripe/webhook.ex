@@ -37,13 +37,16 @@ defmodule Stripe.Webhook do
           # Reject webhook by responding with non-2XX
       end
   """
-  @spec construct_event(String.t(), String.t(), String.t(), integer) ::
+  @spec construct_event(String.t(), String.t(), String.t(), integer, opts :: Keyword.t()) ::
           {:ok, Stripe.Event.t()} | {:error, any}
-  def construct_event(payload, signature_header, secret, tolerance \\ @default_tolerance) do
+  def construct_event(payload, signature_header, secret, tolerance \\ @default_tolerance, opts \\ []) do
     case verify_header(payload, signature_header, secret, tolerance) do
       :ok ->
-        {:ok, convert_to_event!(payload)}
-
+        if Keyword.get(opts, :response_as_json, false) do
+          {:ok, convert_to_json!(payload)}
+        else
+          {:ok, convert_to_event!(payload)}
+        end
       error ->
         error
     end
@@ -146,9 +149,11 @@ defmodule Stripe.Webhook do
     |> secure_compare(input, expected)
   end
 
+  defp convert_to_json!(payload) do
+    payload |> Stripe.API.json_library().decode!()
+  end
+
   defp convert_to_event!(payload) do
-    payload
-    |> Stripe.API.json_library().decode!()
-    |> Stripe.Converter.convert_result()
+    payload |> convert_to_json!() |> Stripe.Converter.convert_result()
   end
 end

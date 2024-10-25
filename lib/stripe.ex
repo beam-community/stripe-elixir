@@ -33,6 +33,10 @@ defmodule Stripe do
       from Stripe. See [https://stripe.com/docs/api/expanding_objects](https://stripe.com/docs/api/expanding_objects)
     * `:idempotency_key` - A string that is passed through as the "Idempotency-Key" header on all POST requests. This is used by Stripe's idempotency layer to manage
       duplicate requests to the stripe API. See [https://stripe.com/docs/api/idempotent_requests](https://stripe.com/docs/api/idempotent_requests)
+    * `:response_as_json` - If set to `true`, the response will be returned as a
+    JSON string instead of a struct. This is useful for persisting the original
+    response from stripe. You can use Stripe.Converter.convert_result/1 to get structs
+    from it.
 
   ### HTTP Connection Pool
 

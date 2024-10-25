@@ -201,7 +201,11 @@ defmodule Stripe.Request do
     with {:ok, params} <- do_cast_to_id(params, request.cast_to_id),
          {:ok, endpoint} <- consolidate_endpoint(endpoint, params),
          {:ok, result} <- API.request(params, method, endpoint, headers, opts) do
-      {:ok, Converter.convert_result(result)}
+      if Keyword.get(opts, :response_as_json, false) do
+        {:ok, result}
+      else
+        {:ok, Converter.convert_result(result)}
+      end
     end
   end
 
@@ -211,11 +215,17 @@ defmodule Stripe.Request do
   @spec make_file_upload_request(t) :: {:ok, struct} | {:error, Stripe.Error.t()}
   def make_file_upload_request(
         %Request{params: params, endpoint: endpoint, method: method, opts: opts} = request
-      ) do
+  ) do
+
+
     with {:ok, params} <- do_cast_to_id(params, request.cast_to_id),
          {:ok, endpoint} <- consolidate_endpoint(endpoint, params),
          {:ok, result} <- API.request_file_upload(params, method, endpoint, %{}, opts) do
-      {:ok, Converter.convert_result(result)}
+      if Keyword.get(opts, :response_as_json, false) do
+        {:ok, result}
+      else
+        {:ok, Converter.convert_result(result)}
+      end
     end
   end
 
