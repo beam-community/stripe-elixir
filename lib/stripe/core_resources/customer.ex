@@ -35,6 +35,8 @@ defmodule Stripe.Customer do
           sources: Stripe.List.t(Stripe.Source.t()),
           subscriptions: Stripe.List.t(Stripe.Subscription.t()),
           tax: Stripe.Types.tax() | nil,
+          tax_exempt: binary | nil,
+          tax_ids: term,
           tax_info: Stripe.Types.tax_info() | nil,
           tax_info_verification: Stripe.Types.tax_info_verification() | nil
         }
@@ -59,6 +61,8 @@ defmodule Stripe.Customer do
     :sources,
     :subscriptions,
     :tax,
+    :tax_exempt,
+    :tax_ids,
     :tax_info,
     :tax_info_verification
   ]
@@ -80,6 +84,7 @@ defmodule Stripe.Customer do
                  optional(:metadata) => Stripe.Types.metadata(),
                  optional(:shipping) => Stripe.Types.shipping(),
                  optional(:source) => Stripe.Source.t(),
+                 optional(:tax_exempt) => :exempt | :none | :reverse,
                  optional(:tax_info) => Stripe.Types.tax_info()
                }
                | %{}
@@ -118,6 +123,7 @@ defmodule Stripe.Customer do
                  optional(:metadata) => Stripe.Types.metadata(),
                  optional(:shipping) => Stripe.Types.shipping(),
                  optional(:source) => Stripe.Source.t(),
+                 optional(:tax_exempt) => :exempt | :none | :reverse,
                  optional(:tax_info) => Stripe.Types.tax_info()
                }
                | %{}
