@@ -1173,7 +1173,19 @@ defmodule Stripe.OpenApi.Phases.Compile do
     {"PostPlans", "/v1/plans", "create"} => "create",
     {"GetPlansPlan", "/v1/plans/{plan}", "retrieve"} => "retrieve",
     {"PostPlansPlan", "/v1/plans/{plan}", "update"} => "update",
-    {"DeletePlansPlan", "/v1/plans/{plan}", "delete"} => "delete"
+    {"DeletePlansPlan", "/v1/plans/{plan}", "delete"} => "delete",
+    {"PostCustomersCustomerSourcesId", "/v1/customers/{customer}/sources/{id}", "update_source"} =>
+      "update_source",
+    {"DeleteCustomersCustomerSourcesId", "/v1/customers/{customer}/sources/{id}", "delete_source"} =>
+      "delete_source",
+    {"PostAccountsAccountExternalAccountsId", "/v1/accounts/{account}/external_accounts/{id}",
+     "update_external_account"} => "update_external_account",
+    {"DeleteAccountsAccountExternalAccountsId", "/v1/accounts/{account}/external_accounts/{id}",
+     "delete_external_account"} => "delete_external_account",
+    {"GetRefunds", "/v1/refunds", "list"} => "list",
+    {"GetRefundsRefund", "/v1/refunds/{refund}", "retrieve"} => "retrieve",
+    {"GetAccount", "/v1/account", "show"} => "show",
+    {"GetAccountsAccount", "/v1/accounts/{account}", "retrieve"} => "retrieve"
   }
 
   defp to_func_name(operation, stripe_extension) do

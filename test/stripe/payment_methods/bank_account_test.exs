@@ -3,14 +3,14 @@ defmodule Stripe.BankAccountTest do
 
   describe "update/2" do
     test "updates a bank account" do
-      assert {:ok, _} = Stripe.BankAccount.update("cus_123", "ba_123")
+      assert {:ok, _} = Stripe.BankAccount.update_source("cus_123", "ba_123")
       assert_stripe_requested(:post, "/v1/customers/cus_123/sources/ba_123")
     end
   end
 
   describe "delete/2" do
     test "deletes a bank account" do
-      assert {:ok, _} = Stripe.BankAccount.delete("cus_123", "ba_123")
+      assert {:ok, _} = Stripe.BankAccount.delete_source("cus_123", "ba_123")
       assert_stripe_requested(:delete, "/v1/customers/cus_123/sources/ba_123")
     end
   end

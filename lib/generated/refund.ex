@@ -52,16 +52,28 @@ defmodule Stripe.Refund do
   )
 
   (
+    @typedoc nil
+    @type created :: %{
+            optional(:gt) => integer,
+            optional(:gte) => integer,
+            optional(:lt) => integer,
+            optional(:lte) => integer
+          }
+  )
+
+  (
     nil
 
-    @doc "<p>You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent refunds are always available by default on the charge object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional refunds.</p>\n\n#### Details\n\n * Method: `get`\n * Path: `/v1/charges/{charge}/refunds`\n"
+    @doc "<p>Returns a list of all refunds you created. We return the refunds in sorted order, with the most recent refunds appearing first The 10 most recent refunds are always available by default on the Charge object.</p>\n\n#### Details\n\n * Method: `get`\n * Path: `/v1/refunds`\n"
     (
       @spec list(
-              charge :: binary(),
               params :: %{
+                optional(:charge) => binary,
+                optional(:created) => created | integer,
                 optional(:ending_before) => binary,
                 optional(:expand) => list(binary),
                 optional(:limit) => integer,
+                optional(:payment_intent) => binary,
                 optional(:starting_after) => binary
               },
               opts :: Keyword.t()
@@ -69,82 +81,8 @@ defmodule Stripe.Refund do
               {:ok, Stripe.List.t(Stripe.Refund.t())}
               | {:error, Stripe.ApiErrors.t()}
               | {:error, term()}
-      def list(charge, params \\ %{}, opts \\ []) do
-        path =
-          Stripe.OpenApi.Path.replace_path_params(
-            "/v1/charges/{charge}/refunds",
-            [
-              %OpenApiGen.Blueprint.Parameter{
-                in: "path",
-                name: "charge",
-                required: true,
-                schema: %OpenApiGen.Blueprint.Parameter.Schema{
-                  name: "charge",
-                  title: nil,
-                  type: "string",
-                  items: [],
-                  properties: [],
-                  any_of: []
-                }
-              }
-            ],
-            [charge]
-          )
-
-        Stripe.Request.new_request(opts)
-        |> Stripe.Request.put_endpoint(path)
-        |> Stripe.Request.put_params(params)
-        |> Stripe.Request.put_method(:get)
-        |> Stripe.Request.make_request()
-      end
-    )
-  )
-
-  (
-    nil
-
-    @doc "<p>Retrieves the details of an existing refund.</p>\n\n#### Details\n\n * Method: `get`\n * Path: `/v1/charges/{charge}/refunds/{refund}`\n"
-    (
-      @spec retrieve(
-              charge :: binary(),
-              refund :: binary(),
-              params :: %{optional(:expand) => list(binary)},
-              opts :: Keyword.t()
-            ) :: {:ok, Stripe.Refund.t()} | {:error, Stripe.ApiErrors.t()} | {:error, term()}
-      def retrieve(charge, refund, params \\ %{}, opts \\ []) do
-        path =
-          Stripe.OpenApi.Path.replace_path_params(
-            "/v1/charges/{charge}/refunds/{refund}",
-            [
-              %OpenApiGen.Blueprint.Parameter{
-                in: "path",
-                name: "charge",
-                required: true,
-                schema: %OpenApiGen.Blueprint.Parameter.Schema{
-                  name: "charge",
-                  title: nil,
-                  type: "string",
-                  items: [],
-                  properties: [],
-                  any_of: []
-                }
-              },
-              %OpenApiGen.Blueprint.Parameter{
-                in: "path",
-                name: "refund",
-                required: true,
-                schema: %OpenApiGen.Blueprint.Parameter.Schema{
-                  name: "refund",
-                  title: nil,
-                  type: "string",
-                  items: [],
-                  properties: [],
-                  any_of: []
-                }
-              }
-            ],
-            [charge, refund]
-          )
+      def list(params \\ %{}, opts \\ []) do
+        path = Stripe.OpenApi.Path.replace_path_params("/v1/refunds", [], [])
 
         Stripe.Request.new_request(opts)
         |> Stripe.Request.put_endpoint(path)
@@ -184,6 +122,47 @@ defmodule Stripe.Refund do
         |> Stripe.Request.put_endpoint(path)
         |> Stripe.Request.put_params(params)
         |> Stripe.Request.put_method(:post)
+        |> Stripe.Request.make_request()
+      end
+    )
+  )
+
+  (
+    nil
+
+    @doc "<p>Retrieves the details of an existing refund.</p>\n\n#### Details\n\n * Method: `get`\n * Path: `/v1/refunds/{refund}`\n"
+    (
+      @spec retrieve(
+              refund :: binary(),
+              params :: %{optional(:expand) => list(binary)},
+              opts :: Keyword.t()
+            ) :: {:ok, Stripe.Refund.t()} | {:error, Stripe.ApiErrors.t()} | {:error, term()}
+      def retrieve(refund, params \\ %{}, opts \\ []) do
+        path =
+          Stripe.OpenApi.Path.replace_path_params(
+            "/v1/refunds/{refund}",
+            [
+              %OpenApiGen.Blueprint.Parameter{
+                in: "path",
+                name: "refund",
+                required: true,
+                schema: %OpenApiGen.Blueprint.Parameter.Schema{
+                  name: "refund",
+                  title: nil,
+                  type: "string",
+                  items: [],
+                  properties: [],
+                  any_of: []
+                }
+              }
+            ],
+            [refund]
+          )
+
+        Stripe.Request.new_request(opts)
+        |> Stripe.Request.put_endpoint(path)
+        |> Stripe.Request.put_params(params)
+        |> Stripe.Request.put_method(:get)
         |> Stripe.Request.make_request()
       end
     )

@@ -6,25 +6,30 @@ defmodule Stripe.CardTest do
              {:__from_json__, 1},
              {:__struct__, 0},
              {:__struct__, 1},
-             delete: 2,
-             delete: 3,
-             delete: 4,
-             update: 2,
-             update: 3,
-             update: 4
+             {:delete_external_account, 2},
+             {:delete_external_account, 3},
+             {:delete_source, 2},
+             {:delete_source, 3},
+             {:delete_source, 4},
+             {:update_external_account, 2},
+             {:update_external_account, 3},
+             {:update_external_account, 4},
+             {:update_source, 2},
+             {:update_source, 3},
+             {:update_source, 4}
            ] = Stripe.Card.__info__(:functions)
   end
 
   describe "update/2" do
     test "updates a card" do
-      assert {:ok, _} = Stripe.Card.update("cus_123", "card_123", %{name: "sco"})
+      assert {:ok, _} = Stripe.Card.update_source("cus_123", "card_123", %{name: "sco"})
       assert_stripe_requested(:post, "/v1/customers/cus_123/sources/card_123")
     end
   end
 
   describe "delete/2" do
     test "deletes a card" do
-      assert {:ok, _} = Stripe.Card.delete("cus_123", "card_123")
+      assert {:ok, _} = Stripe.Card.delete_source("cus_123", "card_123")
       assert_stripe_requested(:delete, "/v1/customers/cus_123/sources/card_123")
     end
   end
